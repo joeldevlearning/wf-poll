@@ -9,8 +9,10 @@ namespace wf_poll_cwe
 
         public PollForm()
         {
-            InitializeComponent();
+            //ORDER MATTERS! Components have a dependency on poller
             poller = new Poller();
+            InitializeComponent();
+
         }
 
             private void submitVote(string vote)
@@ -37,10 +39,10 @@ namespace wf_poll_cwe
 
             private void butSubmit_Click(object sender, EventArgs e)
             {
-                if (Select_IM.Checked == true)
-                    submitVote("Iron Man");
-                else if (select_CA.Checked == true)
-                    submitVote("Captain America");
+                if (CandidateOne.Checked == true)
+                    submitVote(poller.GetCandidates().CandidateOne);
+                else if (CandidateTwo.Checked == true)
+                    submitVote(poller.GetCandidates().CandidateTwo);
             }
 
         private void PollForm_Load(object sender, EventArgs e)

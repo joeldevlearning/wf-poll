@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Select_IM = new System.Windows.Forms.RadioButton();
-            this.select_CA = new System.Windows.Forms.RadioButton();
+            this.CandidateOne = new System.Windows.Forms.RadioButton();
+            this.CandidateTwo = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.butSubmit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,38 +38,38 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             //
-            // Select_IM
+            // CandidateOne
             //
-            this.Select_IM.AutoSize = true;
-            this.Select_IM.Location = new System.Drawing.Point(41, 52);
-            this.Select_IM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Select_IM.Name = "Select_IM";
-            this.Select_IM.Size = new System.Drawing.Size(84, 21);
-            this.Select_IM.TabIndex = 0;
-            this.Select_IM.TabStop = true;
-            this.Select_IM.Text = "Iron Man";
-            this.Select_IM.UseVisualStyleBackColor = true;
-            this.Select_IM.CheckedChanged += new System.EventHandler(this.IM_CheckedChanged);
+            this.CandidateOne.AutoSize = true;
+            this.CandidateOne.Location = new System.Drawing.Point(41, 52);
+            this.CandidateOne.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CandidateOne.Name = "CandidateOne";
+            this.CandidateOne.Size = new System.Drawing.Size(84, 21);
+            this.CandidateOne.TabIndex = 0;
+            this.CandidateOne.TabStop = true;
+            this.CandidateOne.Text = poller.GetCandidates().CandidateOne;
+            this.CandidateOne.UseVisualStyleBackColor = true;
+            this.CandidateOne.CheckedChanged += new System.EventHandler(this.IM_CheckedChanged);
             //
-            // select_CA
+            // CandidateTwo
             //
-            this.select_CA.AutoSize = true;
-            this.select_CA.Location = new System.Drawing.Point(41, 80);
-            this.select_CA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.select_CA.Name = "select_CA";
-            this.select_CA.Size = new System.Drawing.Size(132, 21);
-            this.select_CA.TabIndex = 1;
-            this.select_CA.TabStop = true;
-            this.select_CA.Text = "Captain America";
-            this.select_CA.UseVisualStyleBackColor = true;
-            this.select_CA.CheckedChanged += new System.EventHandler(this.CA_CheckedChanged);
+            this.CandidateTwo.AutoSize = true;
+            this.CandidateTwo.Location = new System.Drawing.Point(41, 80);
+            this.CandidateTwo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CandidateTwo.Name = "CandidateTwo";
+            this.CandidateTwo.Size = new System.Drawing.Size(132, 21);
+            this.CandidateTwo.TabIndex = 1;
+            this.CandidateTwo.TabStop = true;
+            this.CandidateTwo.Text = poller.GetCandidates().CandidateTwo;
+            this.CandidateTwo.UseVisualStyleBackColor = true;
+            this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CA_CheckedChanged);
             //
             // groupBox1
             //
             this.groupBox1.Controls.Add(this.butSubmit);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.select_CA);
-            this.groupBox1.Controls.Add(this.Select_IM);
+            this.groupBox1.Controls.Add(this.CandidateTwo);
+            this.groupBox1.Controls.Add(this.CandidateOne);
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
@@ -140,8 +140,8 @@
 
         #endregion
 
-        private System.Windows.Forms.RadioButton Select_IM;
-        private System.Windows.Forms.RadioButton select_CA;
+        private System.Windows.Forms.RadioButton CandidateOne;
+        private System.Windows.Forms.RadioButton CandidateTwo;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblResults;

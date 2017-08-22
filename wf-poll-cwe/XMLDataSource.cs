@@ -11,7 +11,7 @@ namespace wf_poll_cwe
 
         public XmlDataSource(CandidateList list)
         {
-            this.List = list;
+            List = list;
             const string filename = "polldata.xml";
 
             new XDocument(
@@ -40,35 +40,12 @@ namespace wf_poll_cwe
         {
             XDocument xmlDoc = XDocument.Load(XmlFile);
 
-            var imVoteCount = GetResultsFor(List.CandidateOne, xmlDoc);
+            var cOneVoteCount = GetResultsFor(List.CandidateOne, xmlDoc);
+            var cTwoVoteCount = GetResultsFor(List.CandidateTwo, xmlDoc);
 
-            var caVoteCount = from v in xmlDoc.Descendants("Poll").Descendants("Vote")
-                where v.Value.Contains(List.CandidateTwo)
-                select v.Value;
-
-            var votes = caVoteCount.Concat(imVoteCount).ToList();
+            var votes = cTwoVoteCount.Concat(cOneVoteCount).ToList();
             return votes;
         }
-
-        /*
-        public void submitVote(string theVote)
-        {
-            try
-            {
-                XDocument xmlDoc = XDocument.Load(_XmlFile);
-
-                xmlDoc.Element("Poll").Add(new XElement("Vote", theVote));
-
-                xmlDoc.Save("Poll.xml");
-                //lblResults.Text = "Thank you for your vote.";
-                readXML();
-            }
-            catch
-            {
-                lblResults.Text = "Sorry, unable to process request. Please try again.";
-            }
-        }
-        */
 
         private List<string> GetResultsFor(string candidate, XDocument xmlDoc)
         {
@@ -79,7 +56,7 @@ namespace wf_poll_cwe
                 .ToList();
 
             /*
-            query syntax
+            Like the query syntax? Here...
             var IM_vote_count = from v in xmlDoc.Descendants("Poll").Descendants("Vote")
                 where v.Value.Contains(candidate)
                 select v.Value;

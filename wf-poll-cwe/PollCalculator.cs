@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace wf_poll_cwe
@@ -18,8 +19,8 @@ namespace wf_poll_cwe
             }
 
             double allTotal = cOneTotal + cTwoTotal;
-            double cOnePercent = (cOneTotal / allTotal) * 100;
-            double cTwoPercent = (cTwoTotal / allTotal) * 100;
+            double cOnePercent = Math.Round((cOneTotal / allTotal) * 100, 2);
+            double cTwoPercent = Math.Round((cTwoTotal / allTotal) * 100, 2);
 
             return new Dictionary<string, PollResult>()
             {
