@@ -10,7 +10,7 @@
 - Hit the "Start" button to build the project
 
 ### Dependencies
-- .NET 4.x
+- .NET 4.x (Built with 4.6.1)
 - System.Windows.Forms 4.x ("WinForms")
 - Visual Studio 2015+ (Created in VS2017)
 
