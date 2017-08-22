@@ -30,3 +30,10 @@
 
 These two fields control the Poll labels, but nothing else. So whenever you change the candidate names, you have to manually change these fields.
 
+----
+
+#### References
+
+- Based on this tutorial: http://dotnettutorials.com/tutorials/windows-programming-in-net/winform-poll-cs/
+
+- Special thanks to https://dotnetfiddle.net for LINQ troubleshooting
