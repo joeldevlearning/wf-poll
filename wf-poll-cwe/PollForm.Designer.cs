@@ -158,9 +158,13 @@
             this.ChartForResults.Location = new System.Drawing.Point(541, 42);
             this.ChartForResults.Name = "ChartForResults";
             series1.ChartArea = "ChartArea1";
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.IsValueShownAsLabel = true;
             series1.Legend = "Legend1";
             series1.Name = "CandidateOne";
             series2.ChartArea = "ChartArea1";
+            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series2.IsValueShownAsLabel = true;
             series2.Legend = "Legend1";
             series2.Name = "CandidateTwo";
             this.ChartForResults.Series.Add(series1);
