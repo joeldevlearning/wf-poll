@@ -44,13 +44,13 @@ namespace wf_poll_cwe
                 cTwoName + ": " + results[cTwoName].Total + " votes (" + results[cTwoName].Percent + "%).\n\n";
 
             //update chart with new data
-            //each candidate only has one number to display, but chart library requires IEnumerable, e.g. list
-            ChartForResults.Series["Iron Man"].Points.DataBindY(
-                new List<int> { results[cOneName].Total });
-            ChartForResults.Series["Captain America"].Points.DataBindY(
-                new List<int> { results[cTwoName].Total });
+                //each candidate only has one number to display, but chart library requires IEnumerable, e.g. list
+                ChartForResults.Series["Iron Man"].Points.DataBindY(
+                    new List<int> { results[cOneName].Total });
+                ChartForResults.Series["Captain America"].Points.DataBindY(
+                    new List<int> { results[cTwoName].Total });
 
-        }
+            }
 
             private void butSubmit_Click(object sender, EventArgs e)
             {
