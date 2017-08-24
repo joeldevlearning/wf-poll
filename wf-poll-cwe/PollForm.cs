@@ -12,14 +12,12 @@ namespace wf_poll_cwe
 
         public PollForm()
         {
-            //ORDER MATTERS! Components have a dependency on poller
             poller = new Poller();
             InitializeComponent();
 
+            //Empty data for chart
             CandidateOneResults = new List<int> {0};
             CandidateTwoResults = new List<int> {0};
-            ChartForResults.Series[poller.GetCandidates().CandidateOne].Points.DataBindY(CandidateOneResults);
-            ChartForResults.Series[poller.GetCandidates().CandidateTwo].Points.DataBindY(CandidateTwoResults);
         }
 
             private void submitVote(string vote)
@@ -52,11 +50,8 @@ namespace wf_poll_cwe
             CandidateOneResults = new List<int> {results[cOne].Total};
             CandidateTwoResults = new List<int> {results[cTwo].Total};
 
-            ChartForResults.Series[cOne].Points.DataBindY(CandidateOneResults);
-            ChartForResults.Series[cTwo].Points.DataBindY(CandidateTwoResults);
-
-            //this.ChartForResults.Series["CandidateOne"].Points.AddY(results[cOne].Total);
-            //  this.ChartForResults.Series["CandidateTwo"].Points.AddY(results[cTwo].Total);
+            ChartForResults.Series["Iron Man"].Points.DataBindY(CandidateOneResults);
+            ChartForResults.Series["Captain America"].Points.DataBindY(CandidateTwoResults);
 
         }
 
