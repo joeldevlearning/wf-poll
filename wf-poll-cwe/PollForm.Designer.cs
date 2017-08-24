@@ -45,6 +45,7 @@
             //
             this.CandidateOne.AutoSize = true;
             this.CandidateOne.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.candidateListBindingSource, "CandidateOne", true));
+            this.CandidateOne.Text = "Iron Man"; //Default for designer view
             this.CandidateOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CandidateOne.Location = new System.Drawing.Point(41, 82);
             this.CandidateOne.Margin = new System.Windows.Forms.Padding(4);
@@ -59,6 +60,7 @@
             //
             this.CandidateTwo.AutoSize = true;
             this.CandidateTwo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.candidateListBindingSource, "CandidateTwo", true));
+            this.CandidateTwo.Text = "Captain America"; //Default for designer view
             this.CandidateTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CandidateTwo.Location = new System.Drawing.Point(41, 130);
             this.CandidateTwo.Margin = new System.Windows.Forms.Padding(4);
