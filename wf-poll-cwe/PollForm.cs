@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace wf_poll_cwe
 {
@@ -63,12 +64,15 @@ namespace wf_poll_cwe
                     submitVote(poller.GetCandidates().CandidateTwo);
             }
 
+
+
         private void PollForm_Load(object sender, EventArgs e)
         {
             candidateListBindingSource
                 .Add(new CandidateList(
                     poller.GetCandidates().CandidateOne,
                     poller.GetCandidates().CandidateTwo));
+
 
             ChartForResults.Series["CandidateOne"]["PointWidth"] = "1";
             ChartForResults.Series["CandidateTwo"]["PointWidth"] = "1";
