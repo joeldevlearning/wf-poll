@@ -10,7 +10,7 @@ namespace wf_poll_cwe
         private CandidateList CList;
         public Poller()
         {
-            CList = new CandidateList("Iron Man", "Captain America");
+            CList = new CandidateList();
             Data = new XmlDataSource(CList);
             Calc = new PollCalculator();
         }
@@ -32,12 +32,12 @@ namespace wf_poll_cwe
 
     }
 
-    public struct CandidateList
+    public class CandidateList
     {
         public string CandidateOne { get; }
         public string CandidateTwo { get; }
 
-        public CandidateList(string one, string two)
+        public CandidateList(string one="Iron Man", string two="Captain America")
         {
             CandidateOne = one;
             CandidateTwo = two;

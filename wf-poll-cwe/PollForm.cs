@@ -23,7 +23,7 @@ namespace wf_poll_cwe
                 }
                 catch
                 {
-                    lblResults.Text = "Sorry, unable to process request. Please try again.";
+                    LabelForResults.Text = "Sorry, unable to process request. Please try again.";
                 }
             }
 
@@ -32,7 +32,7 @@ namespace wf_poll_cwe
                 var results = poller.GetPollResults();
                 string cOne = poller.GetCandidates().CandidateOne;
                 string cTwo = poller.GetCandidates().CandidateTwo;
-                lblResults.Text =
+                LabelForResults.Text =
                 cOne + ": " + results[cOne].Total + " votes (" + results[cOne].Percent + "%).\n" +
                 cTwo + ": " + results[cTwo].Total + " votes (" + results[cTwo].Percent + "%).\n\n";
             }
@@ -48,6 +48,11 @@ namespace wf_poll_cwe
         private void PollForm_Load(object sender, EventArgs e)
         {
 
+            candidateListBindingSource
+                .Add(new CandidateList(
+                    poller.GetCandidates().CandidateOne,
+                    poller.GetCandidates().CandidateTwo));
+
         }
 
         private void IM_CheckedChanged(object sender, EventArgs e)
@@ -61,6 +66,11 @@ namespace wf_poll_cwe
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void candidateListBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
