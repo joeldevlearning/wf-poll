@@ -33,7 +33,7 @@ namespace wf_poll_cwe
                 string cOne = poller.GetCandidates().CandidateOne;
                 string cTwo = poller.GetCandidates().CandidateTwo;
 
-                int totalVotes = results[cOne].Total + results[cOne].Total;
+                int totalVotes = results[cOne].Total + results[cTwo].Total;
 
             LabelForResults.Text =
                 "Total Votes: " + totalVotes + "\n\n" +
