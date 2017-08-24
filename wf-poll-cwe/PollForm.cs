@@ -16,8 +16,8 @@ namespace wf_poll_cwe
             poller = new Poller();
             InitializeComponent();
 
-            CandidateOneResults = new List<int> {1};
-            CandidateTwoResults = new List<int> {1};
+            CandidateOneResults = new List<int> {0};
+            CandidateTwoResults = new List<int> {0};
             ChartForResults.Series["CandidateOne"].Points.DataBindY(CandidateOneResults);
             ChartForResults.Series["CandidateTwo"].Points.DataBindY(CandidateTwoResults);
         }
@@ -75,9 +75,8 @@ namespace wf_poll_cwe
                     poller.GetCandidates().CandidateOne,
                     poller.GetCandidates().CandidateTwo));
 
-            ChartForResults.Series["CandidateTwo"].YValueMembers = "Percent";
-            ChartForResults.DataSource = poller.GetPollResults();
-            ChartForResults.DataBind();
+            ChartForResults.Series["CandidateOne"]["PointWidth"] = "1";
+            ChartForResults.Series["CandidateTwo"]["PointWidth"] = "1";
         }
 
         private void IM_CheckedChanged(object sender, EventArgs e)
