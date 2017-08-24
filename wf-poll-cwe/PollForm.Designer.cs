@@ -47,9 +47,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ChartForResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.candidateListBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // CandidateOne
-            // 
+            //
             this.CandidateOne.AutoSize = true;
             this.CandidateOne.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.candidateListBindingSource, "CandidateOne", true));
             this.CandidateOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -62,9 +62,9 @@
             this.CandidateOne.Text = "Iron Man";
             this.CandidateOne.UseVisualStyleBackColor = true;
             this.CandidateOne.CheckedChanged += new System.EventHandler(this.IM_CheckedChanged);
-            // 
+            //
             // CandidateTwo
-            // 
+            //
             this.CandidateTwo.AutoSize = true;
             this.CandidateTwo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.candidateListBindingSource, "CandidateTwo", true));
             this.CandidateTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -77,9 +77,9 @@
             this.CandidateTwo.Text = "Captain America";
             this.CandidateTwo.UseVisualStyleBackColor = true;
             this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CA_CheckedChanged);
-            // 
+            //
             // groupBox1
-            // 
+            //
             this.groupBox1.Controls.Add(this.butSubmit);
             this.groupBox1.Controls.Add(this.LabelForQuestion);
             this.groupBox1.Controls.Add(this.CandidateTwo);
@@ -94,9 +94,9 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vote";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
+            //
             // butSubmit
-            // 
+            //
             this.butSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butSubmit.Location = new System.Drawing.Point(334, 94);
             this.butSubmit.Margin = new System.Windows.Forms.Padding(4);
@@ -106,9 +106,9 @@
             this.butSubmit.Text = "Submit";
             this.butSubmit.UseVisualStyleBackColor = true;
             this.butSubmit.Click += new System.EventHandler(this.butSubmit_Click);
-            // 
+            //
             // LabelForQuestion
-            // 
+            //
             this.LabelForQuestion.AutoSize = true;
             this.LabelForQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelForQuestion.Location = new System.Drawing.Point(23, 27);
@@ -117,9 +117,9 @@
             this.LabelForQuestion.Size = new System.Drawing.Size(290, 25);
             this.LabelForQuestion.TabIndex = 2;
             this.LabelForQuestion.Text = "Who is your favorite Candidate?";
-            // 
+            //
             // LabelForResults
-            // 
+            //
             this.LabelForResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelForResults.Location = new System.Drawing.Point(44, 292);
             this.LabelForResults.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -127,9 +127,9 @@
             this.LabelForResults.Size = new System.Drawing.Size(426, 123);
             this.LabelForResults.TabIndex = 3;
             this.LabelForResults.Click += new System.EventHandler(this.LabelForResults_Click);
-            // 
+            //
             // butResults
-            // 
+            //
             this.butResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butResults.Location = new System.Drawing.Point(133, 206);
             this.butResults.Margin = new System.Windows.Forms.Padding(4);
@@ -139,9 +139,9 @@
             this.butResults.Text = "Show Results";
             this.butResults.UseVisualStyleBackColor = true;
             this.butResults.Click += new System.EventHandler(this.butResults_Click);
-            // 
+            //
             // ChartForResults
-            // 
+            //
             this.ChartForResults.BorderSkin.BorderColor = System.Drawing.Color.DimGray;
             this.ChartForResults.BorderSkin.BorderWidth = 5;
             chartArea1.AxisY.Title = "Votes";
@@ -161,12 +161,12 @@
             series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series1.IsValueShownAsLabel = true;
             series1.Legend = "Legend1";
-            series1.Name = "CandidateOne";
+            series1.Name = poller.GetCandidates().CandidateOne;
             series2.ChartArea = "ChartArea1";
             series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series2.IsValueShownAsLabel = true;
             series2.Legend = "Legend1";
-            series2.Name = "CandidateTwo";
+            series2.Name = poller.GetCandidates().CandidateTwo;
             this.ChartForResults.Series.Add(series1);
             this.ChartForResults.Series.Add(series2);
             this.ChartForResults.Size = new System.Drawing.Size(482, 490);
@@ -176,14 +176,14 @@
             title1.Text = "Poll Results";
             this.ChartForResults.Titles.Add(title1);
             this.ChartForResults.Click += new System.EventHandler(this.ChartForResults_Click);
-            // 
+            //
             // candidateListBindingSource
-            // 
+            //
             this.candidateListBindingSource.DataSource = typeof(wf_poll_cwe.CandidateList);
             this.candidateListBindingSource.CurrentChanged += new System.EventHandler(this.candidateListBindingSource_CurrentChanged);
-            // 
+            //
             // PollForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 593);

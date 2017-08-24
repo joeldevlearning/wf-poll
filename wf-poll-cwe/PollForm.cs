@@ -18,8 +18,8 @@ namespace wf_poll_cwe
 
             CandidateOneResults = new List<int> {0};
             CandidateTwoResults = new List<int> {0};
-            ChartForResults.Series["CandidateOne"].Points.DataBindY(CandidateOneResults);
-            ChartForResults.Series["CandidateTwo"].Points.DataBindY(CandidateTwoResults);
+            ChartForResults.Series[poller.GetCandidates().CandidateOne].Points.DataBindY(CandidateOneResults);
+            ChartForResults.Series[poller.GetCandidates().CandidateTwo].Points.DataBindY(CandidateTwoResults);
         }
 
             private void submitVote(string vote)
@@ -41,7 +41,7 @@ namespace wf_poll_cwe
                 string cOne = poller.GetCandidates().CandidateOne;
                 string cTwo = poller.GetCandidates().CandidateTwo;
 
-                int totalVotes = results[cOne].Total + results[cOne].Total;
+                int totalVotes = results[cOne].Total + results[cTwo].Total;
 
             LabelForResults.Text =
                 "Total Votes: " + totalVotes + "\n\n" +
@@ -52,8 +52,8 @@ namespace wf_poll_cwe
             CandidateOneResults = new List<int> {results[cOne].Total};
             CandidateTwoResults = new List<int> {results[cTwo].Total};
 
-            ChartForResults.Series["CandidateOne"].Points.DataBindY(CandidateOneResults);
-            ChartForResults.Series["CandidateTwo"].Points.DataBindY(CandidateTwoResults);
+            ChartForResults.Series[cOne].Points.DataBindY(CandidateOneResults);
+            ChartForResults.Series[cTwo].Points.DataBindY(CandidateTwoResults);
 
             //this.ChartForResults.Series["CandidateOne"].Points.AddY(results[cOne].Total);
             //  this.ChartForResults.Series["CandidateTwo"].Points.AddY(results[cTwo].Total);
