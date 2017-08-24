@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace wf_poll_cwe
@@ -6,6 +7,8 @@ namespace wf_poll_cwe
     public partial class PollForm : Form
     {
         private IPoller poller;
+        private List<int> CandidateOneResults;
+        private List<int> CandidateTwoResults;
 
         public PollForm()
         {
@@ -13,6 +16,10 @@ namespace wf_poll_cwe
             poller = new Poller();
             InitializeComponent();
 
+            CandidateOneResults = new List<int> {1};
+            CandidateTwoResults = new List<int> {1};
+            ChartForResults.Series["CandidateOne"].Points.DataBindY(CandidateOneResults);
+            ChartForResults.Series["CandidateTwo"].Points.DataBindY(CandidateTwoResults);
         }
 
             private void submitVote(string vote)
@@ -30,6 +37,7 @@ namespace wf_poll_cwe
             private void butResults_Click(object sender, EventArgs e)
             {
                 var results = poller.GetPollResults();
+
                 string cOne = poller.GetCandidates().CandidateOne;
                 string cTwo = poller.GetCandidates().CandidateTwo;
 
@@ -41,9 +49,16 @@ namespace wf_poll_cwe
                 cTwo + ": " + results[cTwo].Total + " votes (" + results[cTwo].Percent + "%).\n\n";
 
 
+            CandidateOneResults = new List<int> {results[cOne].Total};
+            CandidateTwoResults = new List<int> {results[cTwo].Total};
 
+            ChartForResults.Series["CandidateOne"].Points.DataBindY(CandidateOneResults);
+            ChartForResults.Series["CandidateTwo"].Points.DataBindY(CandidateTwoResults);
 
-            }
+            //this.ChartForResults.Series["CandidateOne"].Points.AddY(results[cOne].Total);
+            //  this.ChartForResults.Series["CandidateTwo"].Points.AddY(results[cTwo].Total);
+
+        }
 
             private void butSubmit_Click(object sender, EventArgs e)
             {
@@ -59,6 +74,10 @@ namespace wf_poll_cwe
                 .Add(new CandidateList(
                     poller.GetCandidates().CandidateOne,
                     poller.GetCandidates().CandidateTwo));
+
+            ChartForResults.Series["CandidateTwo"].YValueMembers = "Percent";
+            ChartForResults.DataSource = poller.GetPollResults();
+            ChartForResults.DataBind();
         }
 
         private void IM_CheckedChanged(object sender, EventArgs e)
@@ -82,6 +101,16 @@ namespace wf_poll_cwe
         }
 
         private void LabelForResults_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChartForResults_Click(object sender, EventArgs e)
         {
 
         }
