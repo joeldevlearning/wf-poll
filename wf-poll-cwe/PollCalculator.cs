@@ -6,15 +6,21 @@ namespace wf_poll_cwe
 {
     class PollCalculator : IPollCalculator
     {
-        public Dictionary<string, PollResult> TallyResults(IEnumerable votes, CandidateList cList)
+        private CandidateList CList;
+
+        public PollCalculator(CandidateList cList)
+        {
+            CList = cList;
+        }
+        public Dictionary<string, PollResult> TallyResults(IEnumerable votes)
         {
             int cOneTotal = 0;
             int cTwoTotal = 0;
             foreach (var vote in votes)
             {
-                if (vote.ToString() == cList.CandidateOne)
+                if (vote.ToString() == CList.CandidateOne)
                     cOneTotal++;
-                else if (vote.ToString() == cList.CandidateTwo)
+                else if (vote.ToString() == CList.CandidateTwo)
                     cTwoTotal++;
             }
 
@@ -24,8 +30,8 @@ namespace wf_poll_cwe
 
             return new Dictionary<string, PollResult>()
             {
-                {cList.CandidateOne, new PollResult(cOneTotal, cOnePercent)},
-                {cList.CandidateTwo, new PollResult(cTwoTotal, cTwoPercent)}
+                {CList.CandidateOne, new PollResult(cOneTotal, cOnePercent)},
+                {CList.CandidateTwo, new PollResult(cTwoTotal, cTwoPercent)}
             };
 
 
@@ -34,6 +40,6 @@ namespace wf_poll_cwe
 
     interface IPollCalculator
     {
-        Dictionary<string, PollResult> TallyResults(IEnumerable votes, CandidateList list);
+        Dictionary<string, PollResult> TallyResults(IEnumerable votes);
     }
 }

@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace wf_poll_cwe
 {
     public partial class PollForm : Form
     {
         private IPoller poller;
-        private List<int> CandidateOneResults;
-        private List<int> CandidateTwoResults;
 
         public PollForm()
         {
             poller = new Poller();
             InitializeComponent();
-
-            //Empty data for chart
-            CandidateOneResults = new List<int> {0};
-            CandidateTwoResults = new List<int> {0};
         }
 
-            private void submitVote(string vote)
+            private void SubmitVote(string vote)
             {
                 try
                 {
@@ -37,53 +30,54 @@ namespace wf_poll_cwe
             {
                 var results = poller.GetPollResults();
 
-                string cOne = poller.GetCandidates().CandidateOne;
-                string cTwo = poller.GetCandidates().CandidateTwo;
+                //pull candidate names
+                string cOneName = poller.GetCandidates().CandidateOne;
+                string cTwoName = poller.GetCandidates().CandidateTwo;
 
-                int totalVotes = results[cOne].Total + results[cTwo].Total;
+                //calculate total votes
+                int totalVotes = results[cOneName].Total + results[cTwoName].Total;
 
+                //display totals and percents for each candidate as text
             LabelForResults.Text =
                 "Total Votes: " + totalVotes + "\n\n" +
-                cOne + ": " + results[cOne].Total + " votes (" + results[cOne].Percent + "%).\n" +
-                cTwo + ": " + results[cTwo].Total + " votes (" + results[cTwo].Percent + "%).\n\n";
+                cOneName + ": " + results[cOneName].Total + " votes (" + results[cOneName].Percent + "%).\n" +
+                cTwoName + ": " + results[cTwoName].Total + " votes (" + results[cTwoName].Percent + "%).\n\n";
 
-
-            CandidateOneResults = new List<int> {results[cOne].Total};
-            CandidateTwoResults = new List<int> {results[cTwo].Total};
-
-            ChartForResults.Series["Iron Man"].Points.DataBindY(CandidateOneResults);
-            ChartForResults.Series["Captain America"].Points.DataBindY(CandidateTwoResults);
+            //update chart with new data
+            //each candidate only has one number to display, but chart library requires IEnumerable, e.g. list
+            ChartForResults.Series["Iron Man"].Points.DataBindY(
+                new List<int> { results[cOneName].Total });
+            ChartForResults.Series["Captain America"].Points.DataBindY(
+                new List<int> { results[cTwoName].Total });
 
         }
 
             private void butSubmit_Click(object sender, EventArgs e)
             {
-                if (CandidateOne.Checked == true)
-                    submitVote(poller.GetCandidates().CandidateOne);
-                else if (CandidateTwo.Checked == true)
-                    submitVote(poller.GetCandidates().CandidateTwo);
+            //When submit button is pressed, discover which candidate was selected and store result
+                if (CandidateOne.Checked)
+                    SubmitVote(poller.GetCandidates().CandidateOne);
+                else if (CandidateTwo.Checked)
+                    SubmitVote(poller.GetCandidates().CandidateTwo);
             }
 
 
 
         private void PollForm_Load(object sender, EventArgs e)
         {
+            //bind candidates in form names to CandidateList
             candidateListBindingSource
                 .Add(new CandidateList(
                     poller.GetCandidates().CandidateOne,
                     poller.GetCandidates().CandidateTwo));
-
-
-            ChartForResults.Series["CandidateOne"]["PointWidth"] = "1";
-            ChartForResults.Series["CandidateTwo"]["PointWidth"] = "1";
         }
 
-        private void IM_CheckedChanged(object sender, EventArgs e)
+        private void CandidateOne_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void CA_CheckedChanged(object sender, EventArgs e)
+        private void CandidateTwo_CheckedChanged(object sender, EventArgs e)
         {
 
         }
@@ -99,11 +93,6 @@ namespace wf_poll_cwe
         }
 
         private void LabelForResults_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
         {
 
         }

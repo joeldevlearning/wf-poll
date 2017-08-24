@@ -61,7 +61,7 @@
             this.CandidateOne.TabStop = true;
             this.CandidateOne.Text = "Iron Man";
             this.CandidateOne.UseVisualStyleBackColor = true;
-            this.CandidateOne.CheckedChanged += new System.EventHandler(this.IM_CheckedChanged);
+            this.CandidateOne.CheckedChanged += new System.EventHandler(this.CandidateOne_CheckedChanged);
             // 
             // candidateListBindingSource
             // 
@@ -81,7 +81,7 @@
             this.CandidateTwo.TabStop = true;
             this.CandidateTwo.Text = "Captain America";
             this.CandidateTwo.UseVisualStyleBackColor = true;
-            this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CA_CheckedChanged);
+            this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CandidateTwo_CheckedChanged);
             // 
             // groupBox1
             // 
