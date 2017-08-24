@@ -29,16 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.CandidateOne = new System.Windows.Forms.RadioButton();
+            this.candidateListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CandidateTwo = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.butSubmit = new System.Windows.Forms.Button();
             this.LabelForQuestion = new System.Windows.Forms.Label();
             this.LabelForResults = new System.Windows.Forms.Label();
             this.butResults = new System.Windows.Forms.Button();
-            this.candidateListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox1.SuspendLayout();
+            this.ChartForResults = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.candidateListBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartForResults)).BeginInit();
             this.SuspendLayout();
             // 
             // CandidateOne
@@ -54,7 +61,12 @@
             this.CandidateOne.TabStop = true;
             this.CandidateOne.Text = "Iron Man";
             this.CandidateOne.UseVisualStyleBackColor = true;
-            this.CandidateOne.CheckedChanged += new System.EventHandler(this.IM_CheckedChanged);
+            this.CandidateOne.CheckedChanged += new System.EventHandler(this.CandidateOne_CheckedChanged);
+            // 
+            // candidateListBindingSource
+            // 
+            this.candidateListBindingSource.DataSource = typeof(wf_poll_cwe.CandidateList);
+            this.candidateListBindingSource.CurrentChanged += new System.EventHandler(this.candidateListBindingSource_CurrentChanged);
             // 
             // CandidateTwo
             // 
@@ -69,7 +81,7 @@
             this.CandidateTwo.TabStop = true;
             this.CandidateTwo.Text = "Captain America";
             this.CandidateTwo.UseVisualStyleBackColor = true;
-            this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CA_CheckedChanged);
+            this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CandidateTwo_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -133,16 +145,52 @@
             this.butResults.UseVisualStyleBackColor = true;
             this.butResults.Click += new System.EventHandler(this.butResults_Click);
             // 
-            // candidateListBindingSource
+            // ChartForResults
             // 
-            this.candidateListBindingSource.DataSource = typeof(wf_poll_cwe.CandidateList);
-            this.candidateListBindingSource.CurrentChanged += new System.EventHandler(this.candidateListBindingSource_CurrentChanged);
+            this.ChartForResults.BorderSkin.BorderColor = System.Drawing.Color.DimGray;
+            this.ChartForResults.BorderSkin.BorderWidth = 5;
+            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisX.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisY.Title = "Votes";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.ChartForResults.ChartAreas.Add(chartArea1);
+            legend1.Alignment = System.Drawing.StringAlignment.Center;
+            legend1.AutoFitMinFontSize = 12;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            this.ChartForResults.Legends.Add(legend1);
+            this.ChartForResults.Location = new System.Drawing.Point(541, 42);
+            this.ChartForResults.Name = "ChartForResults";
+            series1.ChartArea = "ChartArea1";
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.IsValueShownAsLabel = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Iron Man";
+            series2.ChartArea = "ChartArea1";
+            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series2.IsValueShownAsLabel = true;
+            series2.Legend = "Legend1";
+            series2.Name = "Captain America";
+            this.ChartForResults.Series.Add(series1);
+            this.ChartForResults.Series.Add(series2);
+            this.ChartForResults.Size = new System.Drawing.Size(482, 490);
+            this.ChartForResults.TabIndex = 7;
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.Name = "Title1";
+            title1.Text = "Poll Results";
+            this.ChartForResults.Titles.Add(title1);
+            this.ChartForResults.Click += new System.EventHandler(this.ChartForResults_Click);
             // 
             // PollForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 515);
+            this.ClientSize = new System.Drawing.Size(1059, 593);
+            this.Controls.Add(this.ChartForResults);
             this.Controls.Add(this.butResults);
             this.Controls.Add(this.LabelForResults);
             this.Controls.Add(this.groupBox1);
@@ -150,9 +198,10 @@
             this.Name = "PollForm";
             this.Text = "Polling System";
             this.Load += new System.EventHandler(this.PollForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.candidateListBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.candidateListBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartForResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -167,6 +216,7 @@
         private System.Windows.Forms.Button butResults;
         private System.Windows.Forms.Button butSubmit;
         private System.Windows.Forms.BindingSource candidateListBindingSource;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartForResults;
     }
 }
 

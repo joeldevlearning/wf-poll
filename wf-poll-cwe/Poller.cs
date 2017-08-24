@@ -8,11 +8,12 @@ namespace wf_poll_cwe
         private IDataSource Data;
         private IPollCalculator Calc;
         private CandidateList CList;
+
         public Poller()
         {
             CList = new CandidateList();
             Data = new XmlDataSource(CList);
-            Calc = new PollCalculator();
+            Calc = new PollCalculator(CList);
         }
 
         public CandidateList GetCandidates()
@@ -27,7 +28,7 @@ namespace wf_poll_cwe
 
         public Dictionary<string, PollResult> GetPollResults()
         {
-            return Calc.TallyResults(Data.ReadAllVotes(), CList);
+            return Calc.TallyResults(Data.ReadAllVotes());
         }
 
     }

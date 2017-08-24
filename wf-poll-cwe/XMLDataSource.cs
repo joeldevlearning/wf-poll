@@ -7,22 +7,20 @@ namespace wf_poll_cwe
     public class XmlDataSource : IDataSource
     {
         private string XmlFile { get; }
-        private CandidateList List { get; }
+        private CandidateList CList { get; }
 
-        public XmlDataSource(CandidateList list)
+        public XmlDataSource(CandidateList cList)
         {
-            List = list;
-            const string filename = "polldata.xml";
+            XmlFile = "polldata.xml";
 
+            CList = cList;
             new XDocument(
                     new XElement("Poll",
-                        new XElement("Vote", list.CandidateOne),
-                        new XElement("Vote", list.CandidateTwo)
+                        new XElement("Vote", cList.CandidateOne),
+                        new XElement("Vote", cList.CandidateTwo)
                     )
                 )
-                .Save(filename);
-
-            XmlFile = filename;
+                .Save(XmlFile);
         }
 
         //IDataSource method
@@ -30,34 +28,35 @@ namespace wf_poll_cwe
         {
             XDocument xmlDoc = XDocument.Load(XmlFile);
 
+            //WARNING: would return null if our xml file was not formatted as we expect
             xmlDoc.Element("Poll").Add(new XElement("Vote", vote));
 
             xmlDoc.Save(XmlFile);
         }
 
         //IDataSource method
-        public List<string> ReadAllVotes()
+        public IEnumerable<string> ReadAllVotes()
         {
             XDocument xmlDoc = XDocument.Load(XmlFile);
 
-            var cOneVoteCount = GetResultsFor(List.CandidateOne, xmlDoc);
-            var cTwoVoteCount = GetResultsFor(List.CandidateTwo, xmlDoc);
+            var cOneVoteCount = GetResultsFor(CList.CandidateOne, xmlDoc);
+            var cTwoVoteCount = GetResultsFor(CList.CandidateTwo, xmlDoc);
 
             var votes = cTwoVoteCount.Concat(cOneVoteCount).ToList();
             return votes;
         }
 
-        private List<string> GetResultsFor(string candidate, XDocument xmlDoc)
+        private IEnumerable<string> GetResultsFor(string candidate, XDocument xmlDoc)
         {
-            //method syntax
+            //LINQ method syntax
             return xmlDoc.Descendants("Poll").Descendants("Vote")
                 .Where(v => v.Value.Contains(candidate))
                 .Select(v => v.Value)
                 .ToList();
 
             /*
-            Like the query syntax? Here...
-            var IM_vote_count = from v in xmlDoc.Descendants("Poll").Descendants("Vote")
+            LINQ query syntax
+            return from v in xmlDoc.Descendants("Poll").Descendants("Vote")
                 where v.Value.Contains(candidate)
                 select v.Value;
             */
@@ -69,6 +68,6 @@ namespace wf_poll_cwe
     {
         void WriteVote(string vote);
 
-        List<string> ReadAllVotes();
+        IEnumerable<string> ReadAllVotes();
     }
 }
