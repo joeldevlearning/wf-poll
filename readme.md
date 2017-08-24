@@ -17,8 +17,6 @@
 ### What's Configurable?
 - In Poller.cs, try changing the names of either candidate. The names are passed to the CandidateList constructor.
 
-### Can I view it in the Form Designer?
-- Yes! However the text labels for candidates are determined at runtime. So in the Designer they appear blank.
 
 ----
 
