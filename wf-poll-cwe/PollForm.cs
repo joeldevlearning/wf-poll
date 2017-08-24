@@ -32,9 +32,17 @@ namespace wf_poll_cwe
                 var results = poller.GetPollResults();
                 string cOne = poller.GetCandidates().CandidateOne;
                 string cTwo = poller.GetCandidates().CandidateTwo;
-                LabelForResults.Text =
+
+                int totalVotes = results[cOne].Total + results[cOne].Total;
+
+            LabelForResults.Text =
+                "Total Votes: " + totalVotes + "\n\n" +
                 cOne + ": " + results[cOne].Total + " votes (" + results[cOne].Percent + "%).\n" +
                 cTwo + ": " + results[cTwo].Total + " votes (" + results[cTwo].Percent + "%).\n\n";
+
+
+
+
             }
 
             private void butSubmit_Click(object sender, EventArgs e)
@@ -47,12 +55,10 @@ namespace wf_poll_cwe
 
         private void PollForm_Load(object sender, EventArgs e)
         {
-
             candidateListBindingSource
                 .Add(new CandidateList(
                     poller.GetCandidates().CandidateOne,
                     poller.GetCandidates().CandidateTwo));
-
         }
 
         private void IM_CheckedChanged(object sender, EventArgs e)
@@ -71,6 +77,11 @@ namespace wf_poll_cwe
         }
 
         private void candidateListBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelForResults_Click(object sender, EventArgs e)
         {
 
         }
