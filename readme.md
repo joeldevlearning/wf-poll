@@ -18,17 +18,7 @@
 - In Poller.cs, try changing the names of either candidate. The names are passed to the CandidateList constructor.
 
 ### Can I view it in the Form Designer?
-- Almost, but no. Two text labels are dynamically created, and these break the designer window. To get back the designer, Go to ```PollForm.Designer.cs``` and change these two lines:
-    
-  - ```this.CandidateOne.Text = poller.GetCandidates().CandidateOne;```
-  - ```this.CandidateTwo.Text = poller.GetCandidates().CandidateTwo;```
-  
-  To...
-
-  - ```this.CandidateOne.Text = "Iron Man";``` 
-  - ```this.CandidateOne.Text = "Captain America";```  
-
-These two fields control the Poll labels, but nothing else. So whenever you change the candidate names, you have to manually change these fields.
+- Yes! However the text labels for candidates are determined at runtime. So in the Designer they appear blank.
 
 ----
 
