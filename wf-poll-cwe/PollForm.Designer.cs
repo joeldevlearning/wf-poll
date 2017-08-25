@@ -37,14 +37,13 @@
             this.CandidateOne = new System.Windows.Forms.RadioButton();
             this.candidateListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CandidateTwo = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SelectionBox = new System.Windows.Forms.GroupBox();
             this.butSubmit = new System.Windows.Forms.Button();
             this.LabelForQuestion = new System.Windows.Forms.Label();
             this.LabelForResults = new System.Windows.Forms.Label();
-            this.butResults = new System.Windows.Forms.Button();
             this.ChartForResults = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.candidateListBindingSource)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.SelectionBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartForResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,22 +82,22 @@
             this.CandidateTwo.UseVisualStyleBackColor = true;
             this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CandidateTwo_CheckedChanged);
             // 
-            // groupBox1
+            // SelectionBox
             // 
-            this.groupBox1.Controls.Add(this.butSubmit);
-            this.groupBox1.Controls.Add(this.LabelForQuestion);
-            this.groupBox1.Controls.Add(this.CandidateTwo);
-            this.groupBox1.Controls.Add(this.CandidateOne);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(501, 217);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Vote";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.SelectionBox.Controls.Add(this.butSubmit);
+            this.SelectionBox.Controls.Add(this.LabelForQuestion);
+            this.SelectionBox.Controls.Add(this.CandidateTwo);
+            this.SelectionBox.Controls.Add(this.CandidateOne);
+            this.SelectionBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectionBox.Location = new System.Drawing.Point(16, 15);
+            this.SelectionBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SelectionBox.Name = "SelectionBox";
+            this.SelectionBox.Padding = new System.Windows.Forms.Padding(4);
+            this.SelectionBox.Size = new System.Drawing.Size(501, 217);
+            this.SelectionBox.TabIndex = 2;
+            this.SelectionBox.TabStop = false;
+            this.SelectionBox.Text = "Vote";
+            this.SelectionBox.Enter += new System.EventHandler(this.SelectionBox_Enter);
             // 
             // butSubmit
             // 
@@ -132,18 +131,6 @@
             this.LabelForResults.Size = new System.Drawing.Size(426, 123);
             this.LabelForResults.TabIndex = 3;
             this.LabelForResults.Click += new System.EventHandler(this.LabelForResults_Click);
-            // 
-            // butResults
-            // 
-            this.butResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butResults.Location = new System.Drawing.Point(133, 206);
-            this.butResults.Margin = new System.Windows.Forms.Padding(4);
-            this.butResults.Name = "butResults";
-            this.butResults.Size = new System.Drawing.Size(235, 48);
-            this.butResults.TabIndex = 6;
-            this.butResults.Text = "Show Results";
-            this.butResults.UseVisualStyleBackColor = true;
-            this.butResults.Click += new System.EventHandler(this.butResults_Click);
             // 
             // ChartForResults
             // 
@@ -191,16 +178,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 593);
             this.Controls.Add(this.ChartForResults);
-            this.Controls.Add(this.butResults);
             this.Controls.Add(this.LabelForResults);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.SelectionBox);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PollForm";
             this.Text = "Polling System";
             this.Load += new System.EventHandler(this.PollForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.candidateListBindingSource)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.SelectionBox.ResumeLayout(false);
+            this.SelectionBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartForResults)).EndInit();
             this.ResumeLayout(false);
 
@@ -210,10 +196,9 @@
 
         private System.Windows.Forms.RadioButton CandidateOne;
         private System.Windows.Forms.RadioButton CandidateTwo;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox SelectionBox;
         private System.Windows.Forms.Label LabelForQuestion;
         private System.Windows.Forms.Label LabelForResults;
-        private System.Windows.Forms.Button butResults;
         private System.Windows.Forms.Button butSubmit;
         private System.Windows.Forms.BindingSource candidateListBindingSource;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartForResults;

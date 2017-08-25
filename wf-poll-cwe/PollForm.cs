@@ -19,25 +19,37 @@ namespace wf_poll_cwe
                 try
                 {
                     poller.SaveVote(vote);
-                }
+                    UpdateResults();
+            }
                 catch
                 {
                     LabelForResults.Text = "Sorry, unable to process request. Please try again.";
                 }
             }
 
-            private void butResults_Click(object sender, EventArgs e)
+        private void butSubmit_Click(object sender, EventArgs e)
             {
-                var results = poller.GetPollResults();
+            //When submit button is pressed, discover which candidate was selected and store result
+                if (CandidateOne.Checked)
+                    SubmitVote(poller.GetCandidates().CandidateOne);
+                else if (CandidateTwo.Checked)
+                    SubmitVote(poller.GetCandidates().CandidateTwo);
+            }
 
-                //pull candidate names
-                string cOneName = poller.GetCandidates().CandidateOne;
-                string cTwoName = poller.GetCandidates().CandidateTwo;
 
-                //calculate total votes
-                int totalVotes = results[cOneName].Total + results[cTwoName].Total;
 
-                //display totals and percents for each candidate as text
+        private void UpdateResults()
+        {
+            var results = poller.GetPollResults();
+
+            //pull candidate names
+            string cOneName = poller.GetCandidates().CandidateOne;
+            string cTwoName = poller.GetCandidates().CandidateTwo;
+
+            //calculate total votes
+            int totalVotes = results[cOneName].Total + results[cTwoName].Total;
+
+            //display totals and percents for each candidate as text
             LabelForResults.Text =
                 "Total Votes: " + totalVotes + "\n\n" +
                 cOneName + ": " + results[cOneName].Total + " votes (" + results[cOneName].Percent + "%).\n" +
@@ -49,19 +61,7 @@ namespace wf_poll_cwe
                 new List<int> { results[cOneName].Total });
             ChartForResults.Series["Captain America"].Points.DataBindY(
                 new List<int> { results[cTwoName].Total });
-
         }
-
-            private void butSubmit_Click(object sender, EventArgs e)
-            {
-            //When submit button is pressed, discover which candidate was selected and store result
-                if (CandidateOne.Checked)
-                    SubmitVote(poller.GetCandidates().CandidateOne);
-                else if (CandidateTwo.Checked)
-                    SubmitVote(poller.GetCandidates().CandidateTwo);
-            }
-
-
 
         private void PollForm_Load(object sender, EventArgs e)
         {
@@ -82,7 +82,7 @@ namespace wf_poll_cwe
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void SelectionBox_Enter(object sender, EventArgs e)
         {
 
         }
