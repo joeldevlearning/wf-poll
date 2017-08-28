@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -6,11 +7,16 @@ namespace wf_poll_cwe
 {
     public partial class PollForm : Form
     {
+        //TODO, ultimately remove dependency on poller
+        //replace with single dependency on viewmodel
         private IPoller poller;
+        private IPollViewModel viewModel;
 
-        public PollForm()
+        public PollForm(IPoller p, IPollViewModel vm)
         {
-            poller = new Poller();
+            viewModel = vm;
+            poller = p;
+
             InitializeComponent();
         }
 
@@ -29,8 +35,7 @@ namespace wf_poll_cwe
 
         private void butSubmit_Click(object sender, EventArgs e)
             {
-            //When submit button is pressed, discover which candidate was selected and store result
-                if (CandidateOne.Checked)
+            if (CandidateOne.Checked)
                     SubmitVote(poller.GetCandidates().CandidateOne);
                 else if (CandidateTwo.Checked)
                     SubmitVote(poller.GetCandidates().CandidateTwo);
@@ -43,6 +48,7 @@ namespace wf_poll_cwe
             var results = poller.GetPollResults();
 
             //pull candidate names
+
             string cOneName = poller.GetCandidates().CandidateOne;
             string cTwoName = poller.GetCandidates().CandidateTwo;
 

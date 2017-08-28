@@ -5,15 +5,24 @@ namespace wf_poll_cwe
 {
     class Poller : IPoller
     {
+        private readonly IPollModel _model;
+
         private IDataSource Data;
         private IPollCalculator Calc;
         private CandidateList CList;
 
-        public Poller()
+        public Poller(IPollModel m)
         {
+            _model = m;
+
             CList = new CandidateList();
             Data = new XmlDataSource(CList);
             Calc = new PollCalculator(CList);
+        }
+
+        public IEnumerable<Candidate> GetCandidateList()
+        {
+            return _model.AllCandidates();
         }
 
         public CandidateList GetCandidates()
@@ -52,5 +61,7 @@ namespace wf_poll_cwe
         Dictionary<string, PollResult> GetPollResults();
 
         CandidateList GetCandidates();
+
+        IEnumerable<Candidate> GetCandidateList();
     }
 }
