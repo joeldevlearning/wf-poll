@@ -11,7 +11,7 @@ namespace wf_poll_cwe
     class PollModel : IPollModel
     {
         private readonly IEnumerable<Candidate> _candidates;
-        public IPollResults VoteCounts { get; }
+        public IPollResults AllResults { get; }
 
         public PollModel(List<string> candidates)
         {
@@ -22,7 +22,7 @@ namespace wf_poll_cwe
             }
             */
                 _candidates = candidates.Select(c => new Candidate(c));
-                VoteCounts = new PollResults(_candidates);
+                AllResults = new PollResults(_candidates);
         }
 
         public IEnumerable<Candidate> AllCandidates()
@@ -32,7 +32,7 @@ namespace wf_poll_cwe
 
         public IPollResults Results()
         {
-            return VoteCounts;
+            return AllResults;
         }
 
         public void Update()
@@ -55,34 +55,60 @@ namespace wf_poll_cwe
 
     class PollResults : IPollResults
     {
-        private int TotalVotes { get; }
-        private Dictionary<Candidate, int> All { get; }
+        private int TotalVoteCount { get; }
+        private Dictionary<Candidate, int> AllRaw { get; }
 
         public PollResults(IEnumerable<Candidate> cList)
         {
-            All = new Dictionary<Candidate, int>();
+            AllRaw = new Dictionary<Candidate, int>();
 
             foreach (Candidate c in cList)
             {
-                All.Add(c,0); //begin with zero votes
-                TotalVotes = All.Count;
+                AllRaw.Add(c,0); //begin with zero votes
+                TotalVoteCount = AllRaw.Count;
             }
         }
+
+        public Dictionary<Candidate, IndividualResults> All()
+        {
+            var allResults = new Dictionary<Candidate,IndividualResults>();
+            foreach (var candidate in AllRaw)
+            {
+                allResults.Add(candidate.Key,
+                    new IndividualResults(candidate.Value,
+                                          TotalVoteCount,
+                                          Percent(candidate.Value, TotalVoteCount)));
+            }
+            return allResults;
+        }
+
+        public int TotalVotes() => TotalVoteCount;
+
 
         public void Update()
         {
             //TODO, called from PollModel
         }
 
-        public Tuple<int, int, decimal> For(Candidate c)
+        public IndividualResults For(Candidate c)
         {
-            var part = All[c]; //get vote count for candidate
-            return new Tuple<int, int, decimal>(part, TotalVotes, Percent(part, TotalVotes));
+            var part = AllRaw[c]; //get vote count for candidate
+            return new IndividualResults(part,
+                                         TotalVoteCount,
+                                         Percent(part, TotalVoteCount));
         }
 
         private decimal Percent(int part, int total)
         {
             return Math.Round(((decimal)part / total) * 100, 2);
+        }
+    }
+
+    public class IndividualResults : Tuple<int, int, decimal>
+    {
+        public IndividualResults(int partOfTotal, int total, decimal percent) : base(partOfTotal, total, percent)
+        {
+
         }
     }
 
@@ -94,7 +120,10 @@ namespace wf_poll_cwe
 
     public interface IPollResults
     {
-        Tuple<int, int, decimal> For(Candidate c);
+        int TotalVotes();
+        Dictionary<Candidate, IndividualResults> All();
+        IndividualResults For(Candidate c);
+
     }
 
 

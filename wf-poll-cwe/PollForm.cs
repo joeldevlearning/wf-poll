@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace wf_poll_cwe
@@ -41,7 +42,30 @@ namespace wf_poll_cwe
                     SubmitVote(poller.GetCandidates().CandidateTwo);
             }
 
+        private void UpdateResultsWithViewModel()
+        {
+            //grab results, ultimately from PollModel
+            var results = viewModel.GetResults().All();
+            var totalVotes = viewModel.GetResults().TotalVotes();
 
+            StringBuilder builder = new StringBuilder();
+
+            string firstPart = "Total Votes: " + totalVotes + "\n\n";
+            string lastPart = "\n\n";
+
+            builder.Append(firstPart);
+            foreach (var candidate in results)
+            {
+                var (part, total, percent) = candidate.Value;
+
+                builder.Append(candidate.Key.Name + ": " +
+                    part + " votes (" +
+                    percent + "%).\n");
+            }
+            builder.Append(lastPart);
+
+            LabelForResults.Text = builder.ToString();
+        }
 
         private void UpdateResults()
         {
