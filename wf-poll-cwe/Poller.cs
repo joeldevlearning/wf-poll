@@ -15,14 +15,17 @@ namespace wf_poll_cwe
         {
             _model = m;
 
+            //add some test data to the model
+
+            foreach (var candidate in _model.AllCandidates())
+            {
+                _model.UpdateByOne(candidate);
+            }
+
+
             CList = new CandidateList();
             Data = new XmlDataSource(CList);
             Calc = new PollCalculator(CList);
-        }
-
-        public IEnumerable<Candidate> GetCandidateList()
-        {
-            return _model.AllCandidates();
         }
 
         public CandidateList GetCandidates()
@@ -35,9 +38,27 @@ namespace wf_poll_cwe
             Data.WriteVote(vote);
         }
 
+        //replaces save vote
+        public void AddVoteFor(Candidate c)
+        {
+            const int votes = 1;
+            //TODO implement
+            UpdateModel(c);
+        }
+
         public Dictionary<string, PollResult> GetPollResults()
         {
             return Calc.TallyResults(Data.ReadAllVotes());
+        }
+
+        private void UpdateStorage(Candidate c)
+        {
+
+        }
+
+        private void UpdateModel(Candidate c)
+        {
+            _model.UpdateByOne(c);
         }
 
     }
@@ -57,11 +78,9 @@ namespace wf_poll_cwe
     public interface IPoller
     {
         void SaveVote(string vote);
-
+        void AddVoteFor(Candidate c);
         Dictionary<string, PollResult> GetPollResults();
 
         CandidateList GetCandidates();
-
-        IEnumerable<Candidate> GetCandidateList();
     }
 }

@@ -40,31 +40,13 @@ namespace wf_poll_cwe
                     SubmitVote(poller.GetCandidates().CandidateOne);
                 else if (CandidateTwo.Checked)
                     SubmitVote(poller.GetCandidates().CandidateTwo);
+
+                ShowResultsFromViewModel();
             }
 
-        private void UpdateResultsWithViewModel()
+        private void ShowResultsFromViewModel()
         {
-            //grab results, ultimately from PollModel
-            var results = viewModel.GetResults().All();
-            var totalVotes = viewModel.GetResults().TotalVotes();
-
-            StringBuilder builder = new StringBuilder();
-
-            string firstPart = "Total Votes: " + totalVotes + "\n\n";
-            string lastPart = "\n\n";
-
-            builder.Append(firstPart);
-            foreach (var candidate in results)
-            {
-                var (part, total, percent) = candidate.Value;
-
-                builder.Append(candidate.Key.Name + ": " +
-                    part + " votes (" +
-                    percent + "%).\n");
-            }
-            builder.Append(lastPart);
-
-            LabelForResults.Text = builder.ToString();
+            LabelForResults.Text = GenerateTextResults();
         }
 
         private void UpdateResults()

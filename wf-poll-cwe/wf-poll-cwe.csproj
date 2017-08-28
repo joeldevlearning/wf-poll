@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PollCalculator.cs" />
+    <Compile Include="PollForm.Formatter.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PollModel.cs" />
     <Compile Include="Poller.cs" />
     <Compile Include="PollForm.cs">

@@ -11,7 +11,7 @@ namespace wf_poll_cwe
     class PollModel : IPollModel
     {
         private readonly IEnumerable<Candidate> _candidates;
-        public IPollResults AllResults { get; }
+        public IPollResults CurrentResults { get; }
 
         public PollModel(List<string> candidates)
         {
@@ -22,7 +22,7 @@ namespace wf_poll_cwe
             }
             */
                 _candidates = candidates.Select(c => new Candidate(c));
-                AllResults = new PollResults(_candidates);
+                CurrentResults = new PollResults(_candidates);
         }
 
         public IEnumerable<Candidate> AllCandidates()
@@ -32,51 +32,39 @@ namespace wf_poll_cwe
 
         public IPollResults Results()
         {
-            return AllResults;
+            return CurrentResults;
         }
 
-        public void Update()
+        public void UpdateByOne(Candidate c)
         {
-            //TODO, call into PollResults to the make the actual change
-        }
-    }
 
-    public class Candidate
-    {
-        public readonly string Name;
-        public readonly Guid Id;
-
-        public Candidate(string name)
-        {
-            Name = name;
-            Id = new Guid();
+            CurrentResults.UpdateByOne(c);
         }
     }
 
     class PollResults : IPollResults
     {
-        private int TotalVoteCount { get; }
-        private Dictionary<Candidate, int> AllRaw { get; }
+        private int TotalVoteCount { get; set; }
+        private Dictionary<Candidate, int> ResultsByCandidate { get; }
 
         public PollResults(IEnumerable<Candidate> cList)
         {
-            AllRaw = new Dictionary<Candidate, int>();
+            ResultsByCandidate = new Dictionary<Candidate, int>();
 
             foreach (Candidate c in cList)
             {
-                AllRaw.Add(c,0); //begin with zero votes
-                TotalVoteCount = AllRaw.Count;
+                ResultsByCandidate.Add(c,0); //begin with zero votes
+                TotalVoteCount = ResultsByCandidate.Count;
             }
         }
 
-        public Dictionary<Candidate, IndividualResults> All()
+        public Dictionary<Candidate, IndividualResults> ByCandidate()
         {
             var allResults = new Dictionary<Candidate,IndividualResults>();
-            foreach (var candidate in AllRaw)
+            foreach (var candidate in ResultsByCandidate)
             {
                 allResults.Add(candidate.Key,
                     new IndividualResults(candidate.Value,
-                                          TotalVoteCount,
                                           Percent(candidate.Value, TotalVoteCount)));
             }
             return allResults;
@@ -85,16 +73,16 @@ namespace wf_poll_cwe
         public int TotalVotes() => TotalVoteCount;
 
 
-        public void Update()
+        public void UpdateByOne(Candidate c)
         {
-            //TODO, called from PollModel
+            TotalVoteCount++;
+            ResultsByCandidate[c]++;
         }
 
         public IndividualResults For(Candidate c)
         {
-            var part = AllRaw[c]; //get vote count for candidate
+            var part = ResultsByCandidate[c]; //get vote count for candidate
             return new IndividualResults(part,
-                                         TotalVoteCount,
                                          Percent(part, TotalVoteCount));
         }
 
@@ -104,9 +92,49 @@ namespace wf_poll_cwe
         }
     }
 
-    public class IndividualResults : Tuple<int, int, decimal>
+
+    public class Candidate
     {
-        public IndividualResults(int partOfTotal, int total, decimal percent) : base(partOfTotal, total, percent)
+        public string Name { get; }
+        public Guid Id { get; }
+
+        public Candidate(string name)
+        {
+            Name = name;
+            Id = new Guid();
+        }
+
+        public bool Equals(Candidate other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return other.Name == Name && other.Id == Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Candidate)) return false;
+            return Equals((Candidate)obj);
+        }
+
+        //adapted from "Effective Java" by Josh Bloch
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + Name.GetHashCode();
+                hash = hash * 23 + Id.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    public class IndividualResults : Tuple<int, decimal>
+    {
+        public IndividualResults(int partOfTotal, decimal percent) : base(partOfTotal, percent)
         {
 
         }
@@ -115,14 +143,16 @@ namespace wf_poll_cwe
     public interface IPollModel
     {
         IEnumerable<Candidate> AllCandidates();
+        void UpdateByOne(Candidate c);
         IPollResults Results();
     }
 
     public interface IPollResults
     {
         int TotalVotes();
-        Dictionary<Candidate, IndividualResults> All();
+        Dictionary<Candidate, IndividualResults> ByCandidate();
         IndividualResults For(Candidate c);
+        void UpdateByOne(Candidate c);
 
     }
 

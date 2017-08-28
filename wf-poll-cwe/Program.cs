@@ -15,9 +15,12 @@ namespace wf_poll_cwe
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var candidates = new List<string>()
+                {"Iron Man",
+                "Captain America" };
 
             //Step 1, create model with basic data
-            IPollModel model = new PollModel(new List<string>() {"Iron Man, Captain America"});
+            IPollModel model = new PollModel(candidates);
 
             //Step 2, create poller, inject model
             IPoller poller = new Poller(model);
@@ -26,8 +29,6 @@ namespace wf_poll_cwe
             //poller is for actions, model is for reading
             IPollViewModel viewModel = new PollViewModel(poller, model);
 
-            //when ready, remove the view's dependency on poller
-            //ALL view interaction should happen through viewmodel
             //PollForm should ONLY see viewmodel
             Application.Run(new PollForm(poller, viewModel));
         }
