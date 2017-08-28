@@ -12,8 +12,8 @@ namespace wf_poll_cwe
     {
         private void InitCandidateRadioButtons()
         {
-            const int horizontal = 40;
-            int vertical = 80;
+            const int horizontal = 50;
+            int vertical = 90;
             foreach (var c in viewModel.GetCandidates())
             {
                 var rButton = new RadioButton

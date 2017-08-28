@@ -37,45 +37,18 @@ namespace wf_poll_cwe
 
         private void butSubmit_Click(object sender, EventArgs e)
             {
-
-            /*How to implement this?
-             * 1) need to create select boxes dynamically to reflect candidate list
-             * 2) need to loop through select options and find the checked one
-             * 3) when found, break loop and call poller to update results
-             * 4) then display as normal
-             *
-             * NOTE: This will break the graph
-             */
-             /*
-            if (CandidateOne.Checked != null)
-
-                    SubmitVote(poller.GetCandidates().CandidateOne);
-                else if (CandidateTwo.Checked)
-                    SubmitVote(poller.GetCandidates().CandidateTwo);
-*/
-
                 //filter ALL radio buttons, get the checked one
                 var checkedButton = this.Controls.OfType<RadioButton>()
                     .FirstOrDefault(r => r.Checked);
 
-                poller.AddVoteFor((Candidate)checkedButton.Tag);
-
-                ShowResultsFromViewModel();
+                if(checkedButton != null)
+                {
+                    poller.AddVoteFor((Candidate)checkedButton.Tag);
+                    LabelForResults.Text = GenerateTextResults();
             }
-
-        private void AllCheckBoxes_CheckedChanged(Object sender, EventArgs e)
-        {
-            /*
-            var checkedButton = this.Controls.OfType<RadioButton>()
-                .FirstOrDefault(r => r.Checked);
-
-            poller.AddVoteFor((Candidate)checkedButton.Tag);*/
         }
 
-        private void ShowResultsFromViewModel()
-        {
-            LabelForResults.Text = GenerateTextResults();
-        }
+
 
         private void UpdateResults()
         {
@@ -112,15 +85,8 @@ namespace wf_poll_cwe
                     poller.GetCandidates().CandidateTwo));
         }
 
-        private void CandidateOne_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CandidateTwo_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void AllCheckBoxes_CheckedChanged(Object sender, EventArgs e)
+        { }
 
         private void SelectionBox_Enter(object sender, EventArgs e)
         {

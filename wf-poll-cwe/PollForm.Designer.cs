@@ -74,7 +74,7 @@
             //
             this.candidateListBindingSource.DataSource = typeof(wf_poll_cwe.CandidateList);
             this.candidateListBindingSource.CurrentChanged += new System.EventHandler(this.candidateListBindingSource_CurrentChanged);
-            //
+            /*
             // CandidateTwo
             //
             this.CandidateTwo.AutoSize = true;
@@ -89,6 +89,7 @@
             this.CandidateTwo.Text = "Captain America";
             this.CandidateTwo.UseVisualStyleBackColor = true;
             this.CandidateTwo.CheckedChanged += new System.EventHandler(this.CandidateTwo_CheckedChanged);
+            */
             //
             // SelectionBox
             //
