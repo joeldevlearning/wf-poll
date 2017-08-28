@@ -41,8 +41,6 @@ namespace wf_poll_cwe
         //replaces save vote
         public void AddVoteFor(Candidate c)
         {
-            const int votes = 1;
-            //TODO implement
             UpdateModel(c);
         }
 

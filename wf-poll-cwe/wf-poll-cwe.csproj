@@ -50,8 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PollCalculator.cs" />
+    <Compile Include="PollForm.Controls.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>PollForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PollForm.Formatter.cs">
       <SubType>Form</SubType>
+      <DependentUpon>PollForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PollModel.cs" />
     <Compile Include="Poller.cs" />
@@ -61,7 +66,9 @@
     <Compile Include="PollForm.Designer.cs">
       <DependentUpon>PollForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PollResult.cs" />
+    <Compile Include="PollResult.cs">
+      <DependentUpon>PollModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="PollViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

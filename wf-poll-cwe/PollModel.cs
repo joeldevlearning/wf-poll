@@ -38,7 +38,7 @@ namespace wf_poll_cwe
         public void UpdateByOne(Candidate c)
         {
 
-            CurrentResults.UpdateByOne(c);
+            CurrentResults.AddOne(c);
         }
     }
 
@@ -54,7 +54,7 @@ namespace wf_poll_cwe
             foreach (Candidate c in cList)
             {
                 ResultsByCandidate.Add(c,0); //begin with zero votes
-                TotalVoteCount = ResultsByCandidate.Count;
+                TotalVoteCount = 0;
             }
         }
 
@@ -73,7 +73,7 @@ namespace wf_poll_cwe
         public int TotalVotes() => TotalVoteCount;
 
 
-        public void UpdateByOne(Candidate c)
+        public void AddOne(Candidate c)
         {
             TotalVoteCount++;
             ResultsByCandidate[c]++;
@@ -152,7 +152,7 @@ namespace wf_poll_cwe
         int TotalVotes();
         Dictionary<Candidate, IndividualResults> ByCandidate();
         IndividualResults For(Candidate c);
-        void UpdateByOne(Candidate c);
+        void AddOne(Candidate c);
 
     }
 

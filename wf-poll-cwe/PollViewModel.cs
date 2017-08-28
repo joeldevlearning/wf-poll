@@ -24,7 +24,7 @@ namespace wf_poll_cwe
 
         public void AddVoteFor(Candidate c)
         {
-            //TODO implement, call poller
+            _poller.AddVoteFor(c);
         }
 
         public IPollResults GetResults()
