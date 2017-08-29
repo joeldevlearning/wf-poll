@@ -15,12 +15,6 @@ namespace wf_poll_cwe
 
         public PollModel(List<string> candidates)
         {
-            /*
-            if (candidates.Count() > 2 && <= 10)
-            {
-                throw new Exception("At least two, and no more than ten, candidates are required.");
-            }
-            */
                 _candidates = candidates.Select(c => new Candidate(c));
                 CurrentResults = new PollResults(_candidates);
         }
@@ -58,7 +52,7 @@ namespace wf_poll_cwe
             }
         }
 
-        public Dictionary<Candidate, IndividualResults> ByCandidate()
+        public Dictionary<Candidate, IndividualResults> ForAll()
         {
             var allResults = new Dictionary<Candidate,IndividualResults>();
             foreach (var candidate in ResultsByCandidate)
@@ -150,7 +144,7 @@ namespace wf_poll_cwe
     public interface IPollResults
     {
         int TotalVotes();
-        Dictionary<Candidate, IndividualResults> ByCandidate();
+        Dictionary<Candidate, IndividualResults> ForAll();
         IndividualResults For(Candidate c);
         void AddOne(Candidate c);
 

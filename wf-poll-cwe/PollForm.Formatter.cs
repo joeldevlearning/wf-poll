@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace wf_poll_cwe
 {
@@ -10,8 +7,7 @@ namespace wf_poll_cwe
     {
         private string GenerateTextResults()
         {
-            //grab results, ultimately from PollModel
-            var results = viewModel.GetResults().ByCandidate();
+            var results = viewModel.GetResults().ForAll();
             var totalVotes = viewModel.GetResults().TotalVotes();
 
             StringBuilder builder = new StringBuilder();

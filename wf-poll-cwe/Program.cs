@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace wf_poll_cwe
@@ -17,7 +16,13 @@ namespace wf_poll_cwe
 
             var candidates = new List<string>()
                 {"Iron Man",
-                "Captain America" };
+                "Captain America",
+                "Black Cat",
+                "Superman",
+                "Scarlet Witch",
+                "Spiderman"
+
+                };
 
             //Step 1, create model with basic data
             IPollModel model = new PollModel(candidates);
