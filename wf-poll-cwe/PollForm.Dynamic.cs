@@ -46,7 +46,7 @@ namespace wf_poll_cwe
             {
                 Dock = DockStyle.Right,
                 BackColor = Color.WhiteSmoke,
-                Palette = ChartColorPalette.Fire,
+                Palette = ChartColorPalette.None,
                 BorderSkin =
                     {
                     BorderColor = Color.DimGray,

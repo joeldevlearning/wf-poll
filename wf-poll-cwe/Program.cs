@@ -35,7 +35,7 @@ namespace wf_poll_cwe
             IPollViewModel viewModel = new PollViewModel(poller, model);
 
             //PollForm should ONLY see viewmodel
-            Application.Run(new PollForm(poller, viewModel));
+            Application.Run(new PollForm(viewModel));
         }
     }
 }

@@ -7,13 +7,11 @@ namespace wf_poll_cwe
 {
     public partial class PollForm : Form
     {
-        private IPoller poller;
         private IPollViewModel viewModel;
 
-        public PollForm(IPoller p, IPollViewModel vm)
+        public PollForm(IPollViewModel vm)
         {
             viewModel = vm;
-            poller = p;
 
             InitializeComponent();
         }
@@ -31,7 +29,7 @@ namespace wf_poll_cwe
 
             if (checkedButton == null) return;
 
-            poller.AddVoteFor((Candidate)checkedButton.Tag);
+            viewModel.AddVoteFor((Candidate)checkedButton.Tag);
             LabelForResults.Text = GenerateTextResults();
 
             var results = viewModel.GetResults().ForAll();
