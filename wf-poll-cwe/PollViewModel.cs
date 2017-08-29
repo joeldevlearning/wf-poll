@@ -33,13 +33,4 @@ namespace wf_poll_cwe
     /*
      * Interface exposed to view
      */
-    public interface IPollViewModel
-    {
-        IEnumerable<Candidate> GetCandidates();
-        void AddVoteFor(Candidate c);
-        IPollResults GetResults();
-
-    }
-
-
 }

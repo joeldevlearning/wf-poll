@@ -43,4 +43,4 @@ namespace wf_poll_cwe
         private void PollForm_Load(object sender, EventArgs e)
         { }
     }
-    }
+}

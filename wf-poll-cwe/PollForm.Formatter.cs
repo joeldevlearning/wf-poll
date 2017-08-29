@@ -20,8 +20,7 @@ namespace wf_poll_cwe
             {
                 var (part, percent) = candidate.Value;
 
-                builder.Append(candidate.Key.Name + ": " +
-                               part + " votes (" +
+                builder.Append(candidate.Key.Name + " (" +
                                percent + "%)\n");
             }
             builder.Append(lastPart);
