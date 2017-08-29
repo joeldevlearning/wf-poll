@@ -7,17 +7,15 @@ namespace wf_poll_cwe
     public class XmlDataSource : IDataSource
     {
         private string XmlFile { get; }
-        private CandidateList CList { get; }
 
-        public XmlDataSource(CandidateList cList)
+        public XmlDataSource()
         {
             XmlFile = "polldata.xml";
 
-            CList = cList;
             new XDocument(
                     new XElement("Poll",
-                        new XElement("Vote", cList.CandidateOne),
-                        new XElement("Vote", cList.CandidateTwo)
+                        new XElement("Vote", ""),
+                        new XElement("Vote", "")
                     )
                 )
                 .Save(XmlFile);
@@ -39,8 +37,8 @@ namespace wf_poll_cwe
         {
             XDocument xmlDoc = XDocument.Load(XmlFile);
 
-            var cOneVoteCount = GetResultsFor(CList.CandidateOne, xmlDoc);
-            var cTwoVoteCount = GetResultsFor(CList.CandidateTwo, xmlDoc);
+            var cOneVoteCount = GetResultsFor("", xmlDoc);
+            var cTwoVoteCount = GetResultsFor("", xmlDoc);
 
             var votes = cTwoVoteCount.Concat(cOneVoteCount).ToList();
             return votes;
